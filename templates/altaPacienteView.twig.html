@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>Agregar Paciente-</title>
+    <meta name="author" content="">
+
+    <!-- Custom styles for this template -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!--  Fonts awesome-->
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+
+    <!-- Custom styles for this template -->
+    <link href="./css/scrolling-nav.css" rel="stylesheet">
+
+  </head>
+{% include 'header.twig.html' %}
+<header class="bg-primary text-white">
+  <div class="container text-center">
+    <h1>Agregar Paciente</h1>
+    <p class="lead">- Agregue un paciente con sus datos demograficos en el Sistema - </p>
+  </div>
+</header>
+
+<!-- contenedor -->
+<section id="datosPaciente">
+  <div class="container">
+    <div class="row">
+        <div class="container">
+        <form action="index.php?action=alta_paciente" method="post" onsubmit="JavaScript:return confirmar('new_paciente');">
+          <h2>Datos Del paciente: </h2>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="lastname"> Apellido </label>
+              <input class="form-control" type="text" placeholder="...." name="apellido" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="firstname">Nombre </label>
+              <input class="form-control" type="text" placeholder="..." name="nombre"required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="fechanacimiento">Fecha de Nacimiento </label>
+              <input class="form-control" type="date" name="fechanacimiento"required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="genero">Genero: </label>
+                <select class="custom-select form-control" name="genero">
+                  <option value="masculino" selected>Masculino</option>
+                  <option value="femenino">Femenino</option>
+                </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="tipodocumento">Tipo de Documento: </label>
+                <select class="custom-select form-control" name="tipodocumento">
+                  {% for tipo in tipodocumento %}
+                    <option value="{{tipo.id}}">{{tipo.nombre}}</option>
+                  {% endfor %}
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="numerodocumento">Numero de Documento: </label>
+              <input class="form-control" type="number" name="ndocumento"required>
+            </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="domicilio">Domicilio: </label>
+            <input class="form-control" type="text" name="domicilio"required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="tel-cel">Telefono: </label>
+            <input class="form-control" type="number" name="telefono">
+          </div>
+        </div>
+      <div class="form-group">
+        <label for="obrasocial" class="formLabel">Obra social:</label>
+          <select class="custom-select form-control" name="obrasocial">
+            {% for obra in obrasocial %}
+              <option value="{{obra.id}}">{{obra.nombre}}</option>
+            {% endfor %}
+          </select>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+<section id="datosDemograficos">
+  <div class="container">
+    <div class="row">
+      <div class="container">
+        <h2>Datos Demograficos: </h2>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="heladera" class="form-check"><h4>Heladera: </h4></label>
+            <input class="form-check-imput" type="radio" name="heladera" value=1 checked>SI
+            <input class="form-check-imput" type="radio" name="heladera" value=0>NO
+          </div>
+          <div class="form-group col-md-4">
+            <label for="electricidad" class="form-check"><h4>Electricidad: </h4></label>
+            <input class="form-check-imput" type="radio" name="electricidad" value=1 checked>SI
+            <input class="form-check-imput" type="radio" name="electricidad" value=0>NO
+          </div>
+          <div class="form-group col-md-4">
+            <label for="electricidad" class="form-check"><h4>Mascota/s: </h4></label>
+            <input class="form-check-imput" type="radio" name="mascota" value=1 checked>SI
+            <input class="form-check-imput" type="radio" name="mascota" value=0>NO
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="tipovivienda"><h4>Tipo de vivienda?</h4></label>
+              <select class="custom-select form-control" name="tipovivienda">
+                {% for tipo in tipovivienda %}
+                  <option value="{{tipo.id}}">{{tipo.nombre}}</option>
+                {% endfor %}
+              </select>
+          </div>
+
+          <div class="form-group col-md-4">
+            <label for="tipoagua"><h4>Tipo de agua?</h4></label>
+              <select class="custom-select form-control" name="tipoagua">
+                {% for tipo in tipoagua %}
+                  <option value="{{tipo.id}}">{{tipo.nombre}}</option>
+                {% endfor %}
+              </select>
+          </div>
+
+          <div class="form-group col-md-4">
+            <label for="tipocalefaccion"><h4>Tipo de calefaccion?</h4></label>
+              <select class="custom-select form-control" name="tipocalefaccion">
+                {% for tipo in tipocalefaccion %}
+                  <option value="{{tipo.id}}">{{tipo.nombre}}</option>
+                {% endfor %}
+              </select>
+          </div>
+        </div>
+        <input type="hidden" name="id">
+        <button type="submit" class="btn btn-info">Agregar Paciente</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+    <!-- Footer -->
+    {% include 'footer.twig.html' %}

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    {% if paginas.option == "usuarios" %}
+        <title>Listar Usuarios-</title>
+    {% elseif paginas.option == "pacientes" %}
+        <title>Listar Pacientes-</title>
+    {% elseif paginas.option == "historia" %}
+        <title>Historia Clinica-</title>
+    {% endif %}
+    <!-- Custom styles for this template -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!--  Fonts awesome-->
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+
+    <!-- Custom styles for this template -->
+    <link href="./css/scrolling-nav.css" rel="stylesheet">
+
+  </head>
+<body>
+
+  <header class="bg-primary text-white">
+    <div class="container text-center">
+      {% if paginas.option == "usuarios" %}
+            <h1>Listado de Usuarios</h1>
+            <p class="lead">- Administre los usuarios en el sistema - </p>
+      {% elseif paginas.option == "pacientes" %}
+            <h1>Listado de Pacientes</h1>
+            <p class="lead">- Administre los pacientes en el sistema - </p>
+      {% elseif paginas.option == 'historia' %}
+            <h1>Historia Clinica de {{paginas.nombrePaciente.nombre}} {{paginas.nombrePaciente.apellido}} </h1>
+            <p class="lead">- Administre las visitas del paciente en el sistema - </p>
+      {% endif %}
+    </div>
+  </header>
+        <div id="wrapper">
+
+          <!-- Page Content -->
+          <div id="page-content-wrapper">
+            <div class="container-fluid">
+              <div id="page-top">
+
+                <div class="col-lg-10 mx-auto">
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                    {% if paginas.option == "usuarios" %}
+                    {% if paginas.busqueda != null %}
+                    <form class="form-inline my-2 my-lg-0" action="index.php?action=filtrar&option={{paginas.option}}&busqueda={{paginas.busqueda}}" method="POST">
+                      {% else %}
+                      <form class="form-inline my-2 my-lg-0" action="index.php?action=filtrar&option={{paginas.option}}" method="POST">
+                        {% endif %}
+                        <select class="custom-select" name="usuario-habilitado">
+                          {% if paginas.filtro == "todos" %}
+                          <option value="todos"selected>Todos</option>
+                          {% else %}
+                          <option value="todos">Todos</option>
+                          {% endif %}
+                          {% if paginas.filtro == "activos" %}
+                          <option value="activos"selected>Activos</option>
+                          {% else %}
+                          <option value="activos">Activos</option>
+                          {% endif %}
+                          {% if paginas.filtro == "bloqueados" %}
+                          <option value="bloqueados"selected>Bloqueados</option>
+                          {% else %}
+                          <option value="bloqueados">Bloqueados</option>
+                          {% endif %}
+                        </select>
+                        <button class="btn btn-info" type="submit">Filtrar</button>
+                      </form>
+                      {% if paginas.filtro != null %}
+                      <form class="form-inline my-2 my-lg-0" action="index.php?action=buscar&option={{paginas.option}}&filtro={{paginas.filtro}}" method="POST">
+                        {% else %}
+                        <form class="form-inline my-2 my-lg-0" action="index.php?action=buscar&option={{paginas.option}}" method="POST">
+                          {% endif %}
+                          <input class="form-control mr-sm-2" type="search" {% if paginas.busqueda != null %}placeholder="{{paginas.busqueda}}" {% else %} placeholder="Buscar..."{% endif %} aria-label="Search" name="busqueda"required>
+                          <button class="btn btn-info" type="submit">Buscar</button>
+                        </form>
+
+                        {% elseif paginas.option == 'historia' and paginas.isPediatra %}
+
+                          <div class="btn-group" role="group" aria-label="Basic example">
+                          <a href="index.php?action=addRevision&idPaciente={{paginas.idPaciente}}"><button class="btn btn-info" >Nueva Revision</button></a>
+                          </div>
+                          <div class="btn-group" style="margin-left:5px" role="group" aria-label="Basic example">
+                            <a href="index.php?action=verCurvaCrecimientoPeso&paciente={{paginas.idPaciente}}"><button class="btn btn-info" >Curva de crecimiento</button></a>
+                          </div>
+                          <div class="btn-group" style="margin-left:5px" role="group" aria-label="Basic example">
+                            <a href="index.php?action=verCurvaCrecimientoTalla&paciente={{paginas.idPaciente}}"><button class="btn btn-info" >Curva de talla</button></a>
+                          </div>
+                          <div class="btn-group" style="margin-left:5px" role="group" aria-label="Basic example">
+                            <a href="index.php?action=verCurvaPPC&paciente={{paginas.idPaciente}}"><button class="btn btn-info" >Curva de PPC</button></a>
+                          </div>
+
+
+                        {% elseif paginas.option == "pacientes" %}
+                        <form class="form-inline my-2 my-lg-0" action="index.php?action=buscar&option={{paginas.option}}" method="POST">
+                          <select class="custom-select" name="tipo-busqueda">
+                            <option value="nombre" {% if paginas.tipo == "nombre" %} selected {% endif %} >Nombre</option>
+                            <option value="apellido"{% if paginas.tipo == "apellido" %} selected {% endif %}>Apellido</option>
+                            <option value="numero"{% if paginas.tipo == "numero" %} selected {% endif %}>Dni</option>
+                          </select>
+                          <input class="form-control mr-sm-2" type="search" {% if paginas.busqueda != null %}placeholder="{{paginas.busqueda}}" {% else %} placeholder="Buscar..."{% endif %} aria-label="Search" name="busqueda"required>
+                          <button class="btn btn-info" type="submit">Buscar</button>
+                        </form>
+                        <a href="index.php?action=verGraficoTipoVivienda"><button class="btn btn-info" style="margin-left:5px" type="button" name="graficoTortaTipoVivienda">Grafico Tipo De Viviendas</button></a>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="col-lg-10 mx-auto">
+                    {% if paginas.vacio == 0 %}
+                    {% if paginas.option == 'pacientes' %}
+                    <table class="table">
+                      <thead class="table-dark">
+                        <tr>
+                          <th scope="col">Apellido</th>
+                          <th scope="col">Nombre</th>
+                          <th scope="col">Domicilio</th>
+                          <th scope="col">Telefono</th>
+                          <th scope="col">Fecha Nacimiento</th>
+                          <th scope="col">Accion</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% set puntero = paginas.indice %}
+                        {% for user in paginas[puntero] %}
+                        <tr>
+                          <td>{{user.apellido}}</td>
+                          <td>{{user.nombre}}</td>
+                          <td>{{user.domicilio}}</td>
+                          <td>{{user.tel}}</td>
+                          <td>{{user.fechaNacimiento}}</td>
+                          <td>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                              <a href="index.php?action=verPerfil&idDatosDemograficos={{user.datosDemograficosId}}&nombre={{user.nombre}}&apellido={{user.apellido}}"><button class="btn btn-outline-primary" >Ver Perfil</button></a>
+                              {% if paginas.isPediatra == true or paginas.isAdmin == true %}<a href="index.php?action=listar&option=historia&indice=1&paciente={{user.idPaciente}}"><button class="btn btn-outline-primary" >Historia Clinica</button></a>{% endif %}
+                              <a href="index.php?action=paciente_update&idPaciente={{user.idPaciente}}&idDatosDemograficos={{user.datosDemograficosId}}"><button class="btn btn-outline-primary" >Editar</button></a>
+                              <a href="index.php?action=eliminarPaciente&idPaciente={{user.idPaciente}}"><button class="btn btn-outline-primary"  onclick="JavaScript:return confirmar('elimina_paciente')">Eliminar</button></a>
+                            </div>
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                    {% elseif paginas.option == 'historia' %}
+                    <table class="table">
+                      <thead class="table-dark">
+                        <tr>
+                          <th scope="col">Fecha</th>
+                          <th scope="col">Pediatra</th>
+                          <th scope="col">Accion</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% set puntero = paginas.indice %}
+                        {% for user in paginas[puntero] %}
+                        <tr>
+                          <td>{{user.fecha}}</td>
+                          {% set id = user.userId - 1 %}
+                          <td>{{paginas.pediatraNombres[id].firstName}} {{paginas.pediatraNombres[id].lastName}}</td>
+                          <td>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                              <a href="index.php?action=showRevision&idPaciente={{user.pacienteId}}&idPediatra={{user.userId}}&idRevision={{user.idControlSalud}}"><button class="btn btn-outline-primary" >Ver Revision</button></a>
+                              {% if paginas.isAdmin == true %}<form action="index.php?action=elimina_revision" method="POST" onsubmit="JavaScript:return confirmar('elimina_revision')">
+                                <input type="hidden" name="revision" value="{{ user.idControlSalud }}">
+                                <input type="submit" class="btn btn-outline-danger" value="Eliminar">
+                              </form>
+                              {% endif %}
+                            </div>
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                    {% elseif paginas.option == 'usuarios' %}
+                    <table class="table">
+                      <thead class="table-dark">
+                        <tr>
+                          <th scope="col">Email</th>
+                          <th scope="col">Usuario</th>
+                          <th scope="col">Apellido</th>
+                          <th scope="col">Nombre</th>
+                          <th scope="col">Accion</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% set puntero = paginas.indice %}
+                        {% for user in paginas[puntero] %}
+                        <tr>
+                          <td>{{user.email}}</td>
+                          <td>{{user.username}}</td>
+                          <td>{{user.lastName}}</td>
+                          <td>{{user.firstName}}</td>
+                          <td>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                              <a href="index.php?action=edit_user&email={{user.email}}"><button class="btn btn-outline-primary" >Editar</button></a>
+                              {% if user.activo == 0 %}
+                              <form action="index.php?action=bloquea_usuario" method="POST" onsubmit="JavaScript:return confirmar('bloqueo')">
+                                <input type="hidden" name="usuario" value="{{ user.idUsuario }}">
+                                <input type="submit" class="btn btn-outline-warning" value="Bloquear">
+                              </form></li>
+                              {% else %}
+                              <form action="index.php?action=activa_usuario" method="POST" onsubmit="JavaScript:return confirmar('activa')">
+                                <input type="hidden" name="usuario" value="{{ user.idUsuario }}">
+                                <input type="submit" class="btn btn-outline-success" value="Activar">
+                              </form>
+                              {% endif %}
+                              <form action="index.php?action=elimina_usuario" method="POST" onsubmit="JavaScript:return confirmar('elimina_usr')">
+                                <input type="hidden" name="usuario" value="{{ user.idUsuario }}">
+                                <input type="submit" class="btn btn-outline-danger" value="Eliminar">
+                              </form>
+                            </div>
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                    {% endif %}
+                  </div>
+
+                  {% if paginas.indice > 1 %}
+                  {% set ant = paginas.indice - 1 %}
+                  {% endif %}
+                  {% if paginas.indice < paginas.cant_paginas %}
+                  {% set sig = paginas.indice + 1 %}
+                  {% endif %}
+                  <nav aria-label="...">
+                    <ul class="pagination justify-content-center">
+                      {% if paginas.indice > 1 %}
+                      <li class="page-item">
+                        {% else %}
+                        <li class="page-item disabled">
+                          {% endif %}
+                          {% if paginas.busqueda != null %}
+                          {% if paginas.filtro != null %}
+                          <a class="page-link" href="index.php?action=listar&option={{paginas.option}}&busqueda={{paginas.busqueda}}&filtro={{paginas.filtro}}&indice={{ant}}">Anterior</a>
+                          {% else %}
+                          <a class="page-link" href="index.php?action=listar&option={{paginas.option}}&busqueda={{paginas.busqueda}}&indice={{ant}}">Anterior</a>
+                          {% endif %}
+                          {% else %}
+                          {% if paginas.filtro != null %}
+                          <a class="page-link" href="index.php?action=listar&option={{paginas.option}}&filtro={{paginas.filtro}}&indice={{ant}}">Anterior</a>
+                          {% else %}
+                          {% if paginas.option == "historia" %}
+                          <a class="page-link" href="index.php?action=listar&option=historia&paciente={{paginas.idPaciente}}&indice={{ant}}">Anterior</a>
+                          {% else %}
+                          <a class="page-link" href="index.php?action=listar&option={{paginas.option}}&indice={{ant}}">Anterior</a>
+                          {% endif %}
+                          {% endif %}
+                          {% endif %}
+                        </li>
+                        {% for i in 1..paginas.cant_paginas %}
+                        {% if paginas.busqueda != null %}
+                        {% if paginas.filtro != null %}
+                        <li {% if i == paginas.indice %}class="page-item active" {% else %}class="page-item"{% endif %}><a class="page-link" href="index.php?action=listar&option={{paginas.option}}&busqueda={{paginas.busqueda}}&filtro={{paginas.filtro}}&indice={{i}}">{{i}}</a></li>
+                        {% else %}
+                        <li {% if i == paginas.indice %}class="page-item active" {% else %}class="page-item"{% endif %}><a class="page-link" href="index.php?action=listar&option={{paginas.option}}&busqueda={{paginas.busqueda}}&indice={{i}}">{{i}}</a></li>
+                        {% endif %}
+                        {% else %}
+                        {% if paginas.filtro != null %}
+                        <li {% if i == paginas.indice %}class="page-item active" {% else %}class="page-item"{% endif %}><a class="page-link" href="index.php?action=listar&option={{paginas.option}}&filtro={{paginas.filtro}}&indice={{i}}">{{i}}</a></li>
+                        {% else %}
+                        {% if paginas.option == "historia" %}
+                        <li {% if i == paginas.indice %}class="page-item active" {% else %}class="page-item"{% endif %}><a class="page-link" href="index.php?action=listar&option=historia&paciente={{paginas.idPaciente}}&indice={{i}}">{{i}}</a></li>
+                        {% else %}
+                        <li {% if i == paginas.indice %}class="page-item active" {% else %}class="page-item"{% endif %}><a class="page-link" href="index.php?action=listar&option={{paginas.option}}&indice={{i}}">{{i}}</a></li>
+                        {% endif %}
+                        {% endif %}
+                        {% endif %}
+                        {% endfor %}
+                        {% if paginas.indice < paginas.cant_paginas %}
+                        <li class="page-item">
+                          {% else %}
+                          <li class="page-item disabled">
+                            {% endif %}
+                            {% if paginas.busqueda != null %}
+                            {% if paginas.filtro != null %}
+                            <a class="page-link" href="index.php?action=listar&option={{paginas.option}}&busqueda={{paginas.busqueda}}&filtro={{paginas.filtro}}&indice={{sig}}">Siguiente</a>
+                            {% else %}
+                            <a class="page-link" href="index.php?action=listar&option={{paginas.option}}&busqueda={{paginas.busqueda}}&indice={{sig}}">Siguiente</a>
+                            {% endif %}
+                            {% else %}
+                            {% if paginas.filtro != null %}
+                            <a class="page-link" href="index.php?action=listar&option={{paginas.option}}&filtro={{paginas.filtro}}&indice={{sig}}">Siguiente</a>
+                            {% else %}
+                            {% if paginas.option == "historia" %}
+                            <a class="page-link" href="index.php?action=listar&option=historia&paciente={{paginas.idPaciente}}&indice={{sig}}">Siguiente</a>
+                            {% else %}
+                            <a class="page-link" href="index.php?action=listar&option={{paginas.option}}&indice={{sig}}">Siguiente</a>
+                            {% endif %}
+                            {% endif %}
+                            {% endif %}
+                          </li>
+                        </ul>
+                      </nav>
+                      {% else %}
+                      <div class="alert alert-warning" role="alert">No se ha encontrado ningun elemento</div>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+            </body>
+
+{% include 'footer.twig.html' %}

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Nueva Revision-</title>
+    <!-- Custom styles for this template -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!--  Fonts awesome-->
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+
+    <!-- Custom styles for this template -->
+    <link href="./css/scrolling-nav.css" rel="stylesheet">
+
+  </head>
+{% include 'header.twig.html' %}
+<header class="bg-primary text-white">
+  <div class="container text-center">
+    <h1>Nueva Revision</h1>
+    <p class="lead">- Complete los datos del paciente para la visita - </p>
+  </div>
+</header>
+<!-- contenedor -->
+<section>
+  <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mx-auto">
+          <form method="post" action="index.php?action=agregarRevision">
+            <div class="form-group">
+              <label>Fecha</label>
+              <input type="date" name="fecha" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Peso</label>
+              <input type="number" name="peso" class="form-control" required>
+            </div>
+            <div class="form-check">
+              <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                <input type="checkbox" class="custom-control-input" name="vacunas">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Vacunas Completas</span>
+              </label>
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" type="text" name="observacionesVacunas" rows="3" placeholder="Observaciones..." required></textarea>
+            </div>
+            <div class="form-check">
+              <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                <input type="checkbox" class="custom-control-input" name="maduracion">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Maduracion Acorde</span>
+              </label>
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" type="text" name="observacionesMaduracion" rows="3" placeholder="Observaciones..." required></textarea>
+            </div>
+            <div class="form-check">
+              <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                <input type="checkbox" class="custom-control-input" name="examenFisico">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Examen Fisico Normal</span>
+              </label>
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" type="text" name="observacionesExamenFisico" rows="3" placeholder="Observaciones..." required></textarea>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label>PC</label>
+                <input type="number" class="form-control"name="pc">
+              </div>
+              <div class="form-group col-md-4">
+                <label>PPC</label>
+                <input type="number" class="form-control" name="ppc">
+              </div>
+              <div class="form-group col-md-4">
+                <label>Talla</label>
+                <input type="number" class="form-control" name="talla">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Alimentacion</label>
+              <textarea class="form-control" type="text" name="alimentacion" rows="3" placeholder="descripción de la alimentación del paciente al día de la consulta"></textarea>
+            </div>
+            <div class="form-group">
+              <label>Observaciones Generales</label>
+              <textarea class="form-control" type="text" name="observacionesGenerales" rows="3" placeholder="Obseraciones..."></textarea>
+            </div>
+            <input type="hidden" name="idPaciente" value="{{idPaciente}}">
+            <button type="submit" class="btn btn-info">Confirmar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+    <!-- Footer -->
+    {% include 'footer.twig.html' %}

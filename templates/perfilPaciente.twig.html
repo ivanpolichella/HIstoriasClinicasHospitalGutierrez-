@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Paciente Perfil-</title>
+    <!-- Custom styles for this template -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!--  Fonts awesome-->
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+
+    <!-- Custom styles for this template -->
+    <link href="./css/scrolling-nav.css" rel="stylesheet">
+
+  </head>
+
+{% include 'header.twig.html' %}
+    <header class="bg-primary text-white">
+      <div class="container text-center">
+        <h1>{{nombre}} {{apellido}}</h1>
+      </div>
+    </header>
+
+    <div class="mensaje-error">{{ error }}</div>
+    <section>
+      <div class="container">
+          <div class="row">
+            <div class="col-lg-4 mx-auto">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Dato</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Heladera</td>
+                    <td>
+                      {% if datosDemograficos.heladera == 1 %}
+                        <span class="fa fa-check" > </span>
+                      {% else %}
+                        <span class="fa fa-times"> </span>
+                      {% endif %}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Mascota/s</td>
+                    <td>
+                      {% if datosDemograficos.mascota == 1 %}
+                        <span class="fa fa-check" > </span>
+                      {% else %}
+                        <span class="fa fa-times"> </span>
+                      {% endif %}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Electricidad</td>
+                    <td>
+                      {% if datosDemograficos.electricidad == 1 %}
+                        <span class="fa fa-check" > </span>
+                      {% else %}
+                        <span class="fa fa-times"> </span>
+                      {% endif %}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Tipo de vivienda</td>
+                    <td>
+                        <span> {{tipoVivienda.nombre}} </span>
+                    </td>
+                  </tr>
+                    <tr>
+                        <td>Tipo de calefacción</td>
+                        <td>
+                          <span> {{tipoCalefaccion.nombre}} </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Tipo de agua</td>
+                        <td>
+                          <span> {{tipoAgua.nombre}} </span>
+                        </td>
+                    </tr>
+
+                  <tr>
+                    <td> <span></span> </td>
+                    <td> <span></span> </td>
+                    <td> <span></span> </td>
+                    <td> <span></span> </td>
+                    <td> <span></span> </td>
+                    <td> <span></span> </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+      </div>
+    </section>
+{% include 'footer.twig.html' %}

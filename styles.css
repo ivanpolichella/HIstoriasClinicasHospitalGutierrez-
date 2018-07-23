@@ -1,0 +1,351 @@
+html,
+body {
+    background-color: #FFFFFF;
+}
+
+/*Estilos del form del login*/
+form.form-center{
+        padding: 18px 25px;
+        font-size: 1.17647em;
+        height: auto;
+        margin-left: 30%;
+        margin-top:40px;
+    }
+form.form-paciente_new{
+  padding-left:20%;
+  margin-bottom:150px;
+}
+/* Estilos para los imputs de los forms */
+input.gris-claro{
+    padding: 10px 15px;
+    box-shadow:none;
+    background: #eee;
+    width: 60%;
+    border-radius: 50px;
+    border: 1px solid #d4dae4;
+    text-overflow:ellipsis;
+    color: #434a5e;
+    font-family: "Montserrat",sans-serif;
+}
+
+input.busqueda{
+  padding: 10px 15px;
+  box-shadow:none;
+  background: #eee;
+  min-width: 250;
+  border-radius: 50px;
+  border: 1px solid #d4dae4;
+  text-overflow:ellipsis;
+  color: #434a5e;
+  font-family: "Montserrat",sans-serif;
+}
+
+/*Si la pantalla es menor a 720 pixeles aplica estos estilos al form*/
+@media screen and (max-width: 720px){
+    form.form-center{
+        padding: 18px 25px;
+        font-size: 1.17647em;
+        margin-left: 15%;
+    }
+
+    input.gris-claro{
+        padding: 10px 15px;
+        box-shadow:none;
+        background: #eee;
+        width: 80%;
+        border-radius: 50px;
+        border: 1px solid #d4dae4;
+        text-overflow:ellipsis;
+        color: #434a5e;
+        font-family: "Montserrat",sans-serif;
+    }
+}
+
+
+.formLabel{
+    display: block;
+    position: relative;
+    text-align: left;
+    font-size:1.17647em;
+    letter-spacing:2px;
+    padding-left:10px;
+    margin-left:0;
+    color:#30a0d5;
+    font-family:"Montserrat",sans-serif ;
+
+}
+
+ form-box{
+    width:50%;
+    padding:10px;
+    float:none;
+    margin-bottom: 15px;
+ }
+
+
+ /*cuando la pantalla es mayor a 780px el ancho de los imputs del login es del 60%*/
+ @media (min-width: 780px){
+        .form-box{
+           width: 60%;
+        }
+}
+/*Estilos para los botones*/
+
+.button{
+    background-color: #98acdb;
+    font-family: "Liberation sans-serif";
+    text-decoration: none;
+    border-radius: 60px;
+    letter-spacing: 2px;
+    color: black;
+    text-align: center;
+    border: 1px solid #d4dae4;
+    padding:10px;
+    margin: 2px;
+    cursor:pointer;
+}
+
+.button-pag-selected{
+  background-color: #82a43a;
+  font-family: "Liberation sans-serif";
+  text-decoration: none;
+  border-radius: 60px;
+  letter-spacing: 2px;
+  color: black;
+  text-align: center;
+  border: 1px solid #d4dae4;
+  padding:10px;
+  margin: 2px;
+  cursor:pointer;
+}
+
+
+.button-menu{
+    left:10px;
+    padding:10px;
+}
+
+.button-login{
+    right:10px;
+    padding:10px;
+    position:relative;
+    margin: 0px;
+
+}
+
+.button-buscar{
+    display: inline-block;
+}
+
+.button-salir{
+  display: inline-block;
+  float: left;
+}
+
+.button:hover {
+    border: 1px solid #45638c;
+    background: #fff !important;
+    color: #30a0d5 !important;
+}
+
+/*Header y Footer*/
+.header-content {
+    position:relative;
+    background-color: #fafafa;
+    min-height: 50px;
+    color: #8a7070;
+    z-index: 1000;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+.footer-content{
+    background-color: #fafafa;
+    min-height: 50px;
+    color: #8a7070;
+    width: 100%;
+    bottom: 0;
+    padding:3;
+    display: block;
+    position: fixed;
+}
+/*borde superior e inferior del header y footer (lineas)*/
+.border{
+    height: 1px;
+    position: absolute;
+    right: 0;
+    left: 0;
+    background-color: #e5e5e5;
+}
+.border-bottom{
+    bottom:-5px
+}
+.border-top{
+     top:5px;
+     position:relative;
+}
+
+/*Estilo para los titulos de las paginas*/
+@media (max-width: 670px){
+        .title{
+          font-size: larger;
+        }
+}
+.title{
+    display: inline;
+    padding-left: 20px;
+    vertical-align: top;
+    position: relative;
+}
+
+section-info{
+    display: flex;
+}
+.contenido-articulo{
+    background: #eeeeee;
+    width: 325px;
+    height: 400;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 30px;
+    float:left;
+    display:inline-block;
+}
+.title-ar{
+    text-align:center;
+    margin-bottom: 20px;
+}
+.title-ar-blue{
+  color:#30a0d5;
+}
+
+.logo{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: inline-flex;
+}
+
+.ul-left {list-style-type: none; margin: 0; padding: 0; overflow: hidden;
+   background-color: #fafafa;margin-top: 0px}
+.li-left {float: left;}
+.ul-right {list-style-type: none; margin: 0; padding: 0; overflow: hidden;
+   background-color: #fafafa;margin-top: 0px}
+.li-right {float: right;margin-right: 30px}
+
+ul{
+    list-style:none;
+}
+li a {
+    text-decoration:none;
+	  padding-bottom:12px;
+    display:block;
+}
+ul li ul {
+	display:none;
+  list-style-position: center;
+	position:absolute;
+	min-width:140px;
+}
+li:hover > ul {
+	display:block;
+}
+li ul li {
+	position:relative;
+}
+.desplega{
+  padding-left:0;
+  z-index:1;
+}
+
+.nav-menu{
+    float: right;
+    display: flex;
+    margin-left: 20px;
+    position:relative;
+}
+.select-admin{
+    padding: 5px;
+    background: #e1f0fd;
+    width: inherit;
+    letter-spacing: 2px;
+    border-radius: 10px;
+    text-overflow: ellipsis;
+    color: #434a5e;
+    font-family: monospace;
+    margin-top: 5px;
+}
+
+.select-gris-claro{
+  padding: 10px 15px;
+  box-shadow:none;
+  background: #eee;
+  width: 60%;
+  border-radius: 50px;
+  border: 1px solid #d4dae4;
+  text-overflow:ellipsis;
+  color: #434a5e;
+  font-family: "Montserrat",sans-serif;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.mensaje-error{
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.textareaConfig{
+  margin: 0px;
+  height: 337px;
+  width: 317px;
+  border-radius:10px;
+  font-family: monospace;
+
+}
+.textLine{
+  font-size:1.17647em;
+  color:#30a0d5;
+  font-family:"Montserrat",sans-serif ;
+}
+.conteiner{
+    margin-top:20px;
+    min-height:100%;
+}
+ul.pagination {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+ul.pagination li {display: inline;}
+
+ul.pagination li a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+}
+
+ul.pagination li a.active {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+}
+
+ul.pagination li a:hover:not(.active) {background-color: #ddd;}
+
+div.center {text-align: center;}

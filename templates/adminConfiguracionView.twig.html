@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Configuracion-</title>
+    <!-- Custom styles for this template -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!--  Fonts awesome-->
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+
+    <!-- Custom styles for this template -->
+    <link href="./css/scrolling-nav.css" rel="stylesheet">
+
+  </head>
+<body>
+
+{% include 'header.twig.html' %}
+<header class="bg-primary text-white">
+  <div class="container text-center">
+    <h1>Configuraciones</h1>
+    <p class="lead">- Cambie la configuración del sistema - </p>
+  </div>
+</header>
+    <!-- contenedor -->
+<section>
+  <div class="container">
+    <div class="row">
+        <div class="container">
+        <form action="index.php?action=nuevaConfiguracion" name="configuracion" method="post" onsubmit="JavaScript:return confirmar('new_config');">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="titulo" class="formLabel">Titulo De la página:</label>
+                <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" type="text" name="titulo" value=" {{ titulo }} ">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="habilitado" class="formLabel">Desea que el sistema esté habilitado?:</label>
+                <select class="form-control" name="habilitado">
+                  <option value="si" selected>SI</option>
+                  <option value="no">NO</option>
+                </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label class="formLabel" for="email">Mail del Hospital:</label>
+                 <input class="form-control" type="text" name="email" value="{{ email }}">
+            </div>
+            <div class="form-group col-md-6">
+              <label class="formLabel" for="cantidad_listado">Cantidad de elementos en los Listados:</label>
+                 <input class="form-control" type="number" name="cantidad_listado" value="{{ cantidad_listado }}">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <h2>El Hospital</h2>
+            <textarea class="form-control" type="text" name="descripcionHospital" rows="4">{{  descripcionHospital }}</textarea>
+          </div>
+
+          <div class="form-group">
+            <h2>La Guardia</h2>
+            <textarea class="form-control" type="text" name="descripcionGuardia" rows="4">{{  descripcionGuardia }}</textarea>
+          </div>
+
+          <div class="form-group">
+            <h2>Especialidades</h2>
+            <textarea class="form-control" type="text" name="descripcionEspecialidades" rows="4">{{  descripcionEspecialidades }}</textarea>
+          </div>
+
+        <button type="submit" class="btn btn-info">Guardar Configuracion</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+</body>
+{% include 'footer.twig.html' %}

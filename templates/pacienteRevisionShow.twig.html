@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Revision-</title>
+    <!-- Custom styles for this template -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!--  Fonts awesome-->
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+
+    <!-- Custom styles for this template -->
+    <link href="./css/scrolling-nav.css" rel="stylesheet">
+
+  </head>
+  <header class="bg-primary text-white">
+    <div class="container text-center">
+      <h1>Revision de {{pacienteNombre.nombre}} del {{fecha}}</h1>
+      <p class="lead">- Detalles de la consulta - </p>
+    </div>
+  </header>
+  <!-- contenedor -->
+  <section>
+    <div class="container">
+        <div class="row">
+          <div class="col-lg-5 mx-auto">
+            <table class="table table-hover">
+              <thead class="thead-dark">
+                <tr>
+                  <th>Nombre</th>
+                  <th>Dato</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    Fecha De Nacimineto
+                  </td>
+                  <td>
+                    {{edad}}
+                  </td>
+                </tr>
+              <tr>
+                <td>
+                  Peso
+                </td>
+                <td>
+                  {{peso}}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Vacunas Completas
+                </td>
+                <td>
+                  {% if vacunasCompletas == 1 %}Si{% else %}No{% endif %}
+                </td>
+              </tr>
+                <tr>
+                  <td>
+                    Observacion Vacunas
+                  </td>
+                  <td>
+                    {{observacionesVacuna}}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Maduracion Acorde
+                  </td>
+                  <td>
+                    {% if maduracionAcorde == 1 %}Si{% else %}No{% endif %}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Observaciones Maduracion
+                  </td>
+                  <td>
+                    {{observacionesMaduracion}}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Examen Fisico Normal
+                  </td>
+                  <td>
+                    {% if exFisicoNormal == 1 %}Si{% else %}No{% endif %}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Observaciones Examen Fisico
+                  </td>
+                  <td>
+                    {{exFisicoObservaciones}}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    PC
+                  </td>
+                  <td>
+                    {{pc}}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    PPC
+                  </td>
+                  <td>
+                    {{ppc}}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Talla
+                  </td>
+                  <td>
+                    {{talla}}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Alimenacion
+                  </td>
+                  <td>
+                    {{alimentacion}}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Observaciones Generales
+                  </td>
+                  <td>
+                    {{observacionesGenerales}}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Pediatra
+                  </td>
+                  <td>
+                    {{pediatraNombre.firstName}} {{pediatraNombre.lastName}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+    </div>
+  </section>
+<!-- Footer -->
+{% include 'footer.twig.html' %}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>Tipo de Viviendas</title>
+    <meta name="author" content="">
+
+    <!-- Custom styles for this template -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!--  Fonts awesome-->
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+
+    <!-- Custom styles for this template -->
+    <link href="./css/scrolling-nav.css" rel="stylesheet">
+
+  </head>
+	<body>
+		<script src="./vendor/grafico/code/highcharts.js"></script>
+		<script src="./vendor/grafico/code/modules/exporting.js"></script>
+
+		{% include 'header.twig.html' %}
+		<header class="bg-primary text-white">
+		  <div class="container text-center">
+		    <h1>Grafico de Tortas</h1>
+		  </div>
+		</header>
+
+		<script src="../vendor/grafico/code/highcharts.js"></script>
+    <script src="../vendor/grafico/code/modules/exporting.js"></script>
+
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<script type="text/javascript">
+Highcharts.chart('container', {
+
+    title: {
+        text: 'Tipos de viviendas'
+    },
+
+    series: [{
+        type: 'pie',
+        allowPointSelect: true,
+        keys: ['name', 'y', 'selected', 'sliced'],
+        data: [
+          {% for tipo in tipos %}
+            ['{{ tipo.nombre }}',{{ tipo.cantidad }}, false],
+          {% endfor %}
+        ],
+        showInLegend: true
+    }]
+});
+		</script>
+		{% include 'footer.twig.html' %}

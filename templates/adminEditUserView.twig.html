@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Configuracion-</title>
+    <!-- Custom styles for this template -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!--  Fonts awesome-->
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+
+    <!-- Custom styles for this template -->
+    <link href="./css/scrolling-nav.css" rel="stylesheet">
+
+  </head>
+
+{% include 'header.twig.html' %}
+<header class="bg-primary text-white">
+  <div class="container text-center">
+    <h1>Editar Usuario</h1>
+    <p class="lead">- Edite la informacion de un usuario del sistema - </p>
+  </div>
+</header>
+<section>
+  <div class="container">
+    <div class="row">
+        <div class="container">
+        <form action="index.php?action=confirmar_edit_user" method="POST" onsubmit="JavaScript:return confirmar('update_usuario');">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="apellido"> Apellido: </label>
+              <input class="form-control" value="{{datos.lastName}}" type="text" name="apellido" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="name"> Nombre: </label>
+              <input class="form-control" type="text" value="{{datos.firstName}}" name="name" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label class="form-check" for="roles"> Roles: </label>
+              {% for rol in roles  %}
+                 <label class="form-check-label"><input class="form-check-input" type="checkbox" name="roles[]" id="rol" value="{{rol.nombre}}" {% if tieneRol[rol.nombre] == true %} checked="true" {% endif %} > {{ rol.nombre }}</label>
+                 {% endfor %}
+            </div>
+            <div class="form-group col-md-6">
+              <label for="email" class="formLabel"> Email: </label>
+              <input class="form-control" type="text" value="{{datos.email}}" name="email" required>
+            </div>
+          </div>
+        </div>
+        <input type="hidden" name="id" value="{{datos.idUsuario}}">
+        <button type="submit" class="btn btn-primary">Modificar Usuario</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% include 'footer.twig.html' %}

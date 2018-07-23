@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Agregar Usuario-</title>
+    <!-- Custom styles for this template -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!--  Fonts awesome-->
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+
+    <!-- Custom styles for this template -->
+    <link href="./css/scrolling-nav.css" rel="stylesheet">
+
+  </head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">{{infoHospital.titulo}}</a>
+      {% if session == false %}
+        <a href="index.php?action=login"><button type="button" class="btn btn-info">Ingresar</button></a>
+      {% else %}
+        <a href="#menu-toggle" class="btn btn-info" id="menu-toggle">Opciones</a>
+      {% endif %}
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#paciente">Paciente</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#datosDemograficos">Datos Demograficos</a>
+              </li>
+            </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div id="wrapper">
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+          <ul class="sidebar-nav">
+              <li class="sidebar-brand">
+                  <a href="#">
+                      Opciones
+                  </a>
+              </li>
+              <li>
+                  <a href="index.php">Home</a>
+              </li>
+                {% if isAdm == true  %}
+                 <li><a href="index.php?action=listar&option=usuarios&indice=1">Usuarios</a></li>
+                 <li><a href="index.php?action=adduser">Nuevo Usuario</a></li>
+                 <li><a href="index.php?action=configuraciones">Configuracion</a></li>
+                {% endif %}
+              <li>
+                {% for perm in permissions  %}
+                {% if perm.nombre == 'pacienteIndex' %}
+                    <a href="index.php?action=listar&option=pacientes&indice=1">Pacientes</a>
+                {% elseif perm.nombre == 'pacienteNew' %}
+                    <a href="index.php?action=paciente_new">Nuevo Paciente</a>
+                {% endif %}
+                {% endfor %}
+              </li>
+              <li><a href="index.php?action=destroy">Salir</a></li>
+          </ul>
+      </div>
+      <!-- /#sidebar-wrapper -->
+      <div class="mensaje-error">{{mensaje}}</div>
+
+<header class="bg-primary text-white">
+  <div class="container text-center">
+    <h1>Editar paciente</h1>
+    <p class="lead">- Edite un paciente o sus datos demograficos del Sistema - </p>
+  </div>
+</header>
+<section id="paciente">
+  <div class="container">
+    <div class="row">
+        <div class="container">
+        <form action="index.php?action=editarPaciente" method="post" onsubmit="JavaScript:return confirmar('update_paciente');">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="apellido"> Apellido: </label>
+              <input class="form-control" value="{{paciente.apellido}}" type="text" name="apellido" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="name"> Nombre: </label>
+              <input class="form-control" type="text" value="{{paciente.nombre}}" name="nombre" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label class="form-check" for="roles"> Fecha de Nacimiento: </label>
+              <input class="form-control" type="date" name="fechanacimiento" value="{{paciente.fechaNacimiento}}"required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="habilitado">Genero:</label>
+                <select class="form-control" name="genero">
+                  <option value="masculino" {% if paciente.genero == masculino %} selected {% endif %} >Masculino</option>
+                  <option value="femenino" {% if paciente.genero == femenino %} selected {% endif %} >Femenino</option>
+                </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="tipodocumento">Tipo de Documento: </label>
+                <select class="form-control" name="tipodocumento">
+                  {% for tipo in tipodocumento %}
+                    <option  value="{{tipo.id}}" {% if paciente.tipoDocId == tipo.id %} selected {% endif %}  >{{tipo.nombre}}</option>
+                  {% endfor %}
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="name"> DNI: </label>
+              <input class="form-control" type="number" value="{{paciente.numero}}" name="ndocumento" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="tipodocumento">Domicilio: </label>
+              <input class="form-control" type="text" value="{{paciente.domicilio}}" name="domicilio" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="name"> Telefono: </label>
+              <input class="form-control" type="number" value="{{paciente.tel}}" name="telefono" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+              <label for="obrasocial">Obra social:</label>
+                <select class="custom-select form-control" name="obrasocial">
+                  {% for obra in obrasocial %}
+                    <option value="{{obra.id}}" {% if paciente.idObraSocial == obra.id %} selected {% endif %}>{{obra.nombre}}</option>
+                  {% endfor %}
+                </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      </section>
+      <section id="datosDemograficos">
+        <div class="container">
+          <div class="row">
+            <div class="container">
+              <h2>Datos Demograficos: </h2>
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label for="heladera" class="form-check"><h4>Heladera: </h4></label>
+                  <input class="form-check-imput" type="radio" name="heladera" value=1 {% if datosDemograficos.heladera==1  %} checked=true {% endif %}>SI
+                  <input class="form-check-imput" type="radio" name="heladera" value=0 {% if datosDemograficos.heladera==0  %} checked=true {% endif %}>NO
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="electricidad" class="form-check"><h4>Electricidad: </h4></label>
+                  <input class="form-check-imput" type="radio" name="electricidad" value=1 {% if datosDemograficos.electricidad==1  %} checked=true {% endif %}>SI
+                  <input class="form-check-imput" type="radio" name="electricidad" value=0 {% if datosDemograficos.electricidad==0  %} checked=true {% endif %}>NO
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="mascota" class="form-check"><h4>Mascota/s: </h4></label>
+                  <input class="form-check-imput" type="radio" name="mascota" value=1 {% if datosDemograficos.mascota==1  %} checked=true {% endif %}>SI
+                  <input class="form-check-imput" type="radio" name="mascota" value=0 {% if datosDemograficos.mascota==0  %} checked=true {% endif %}>NO
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label for="tipovivienda"><h4>Tipo de vivienda?</h4></label>
+                    <select class="custom-select form-control" name="tipovivienda">
+                      {% for tipo in tipovivienda %}
+                        <option value="{{tipo.id}}" {% if paciente.tipoViviendaId == tipo.id %} selected {% endif %}>{{tipo.nombre}}</option>
+                      {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group col-md-4">
+                  <label for="tipoagua"><h4>Tipo de agua?</h4></label>
+                    <select class="custom-select form-control" name="tipoagua">
+                      {% for tipo in tipoagua %}
+                        <option value="{{tipo.id}}" {% if paciente.tipoAguaId == tipo.id %} selected {% endif %}>{{tipo.nombre}}</option>
+                      {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group col-md-4">
+                  <label for="tipocalefaccion"><h4>Tipo de calefaccion?</h4></label>
+                    <select class="custom-select form-control" name="tipocalefaccion">
+                      {% for tipo in tipocalefaccion %}
+                        <option value="{{tipo.id}}" {% if paciente.tipoCalefaccionId  == tipo.id %} selected {% endif %}>{{tipo.nombre}}</option>
+                      {% endfor %}
+                    </select>
+                </div>
+              </div>
+              <input type="hidden" name="idPaciente" value="{{paciente.idPaciente}}">
+              <button type="submit" class="btn btn-info">Confirmar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+    </section>
+  </body>
+
+{% include 'footer.twig.html' %}

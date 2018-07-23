@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Agregar Usuario-</title>
+    <!-- Custom styles for this template -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!--  Fonts awesome-->
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+
+    <!-- Custom styles for this template -->
+    <link href="./css/scrolling-nav.css" rel="stylesheet">
+
+  </head>
+
+{% include 'header.twig.html' %}
+    <!-- contenedor -->
+<header class="bg-primary text-white">
+  <div class="container text-center">
+    <h1>Agregar Usuario</h1>
+    <p class="lead">- Agregue un usuario en el Sistema - </p>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+    <div class="row">
+        <div class="container">
+        <form action="index.php?action=alta_usuario" method="post" onsubmit="JavaScript:return confirmar('new_usuario');">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="user_name"> Nombre De Usuario: </label>
+              <input class="form-control" type="text" name="user_name" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="password"> Contraseña: </label>
+              <input class="form-control" type="password" placeholder="*******" name="password"required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="apellido"> Apellido: </label>
+              <input class="form-control" placeholder="...." type="text" name="apellido" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="name"> Nombre: </label>
+              <input class="form-control" type="text" placeholder="...." name="name" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="type" class="form-check"> Roles del nuevo usuario: </label>
+                {% for i in tipos_usuarios %}
+                     <label class="form-check-label"><input class="form-check-input" type="checkbox" name="roles[]" value="{{i.idRol}}">{{i.nombre}}</label>
+               {% endfor %}
+            </div>
+            <div class="form-group col-md-6">
+              <label for="email" class="formLabel"> Email: </label>
+              <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" type="text" placeholder="ejemplo@gmail.com" name="email" required>
+            </div>
+          </div>
+        </div>
+        <input type="hidden" name="id">
+        <button type="submit" class="btn btn-primary">Agregar Usuario</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% include 'footer.twig.html' %}

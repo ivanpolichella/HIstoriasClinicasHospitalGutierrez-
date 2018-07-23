@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Iniciar Sesión-</title>
+    <!-- Custom styles for this template -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!--  Fonts awesome-->
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+
+    <!-- Custom styles for this template -->
+    <link href="./css/scrolling-nav.css" rel="stylesheet">
+
+  </head>
+
+{% include 'header.twig.html' %}
+    <!-- Page Content -->
+          <!-- <div id="page-content-wrapper">
+              <div class="container-fluid"> -->
+                <body id="page-top">
+                  <section>
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-lg-4 mx-auto">
+                          <form action="index.php?action=logincheck" method="POST">
+                              <div class="form-group">
+                                      <label for="exampleInputEmail1">Correo Electronico</label>
+                                      <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ejemplo@hotmail.com" required>
+                                      <small id="emailHelp" class="form-text text-muted">Si usted no dispone de una cuenta por favor contáctese con el administrador.</small>
+                              </div>
+                              <div class="form-group">
+                                      <label for="exampleInputPassword1">Contraseña</label>
+                                      <input type="password" name="password" class="form-control" id="exampleInputPassword1" required>
+                              </div>
+                              {% if mensaje != "" %}
+                              <div class="alert alert-warning" role="alert">{{mensaje}}</div>
+                              {% endif %}
+                              <button type="submit" class="btn btn-info">Confirmar</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                </body>
+              <!-- </div>
+          </div> -->
+      <!-- /#wrapper -->
+{% include 'footer.twig.html' %}
